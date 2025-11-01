@@ -10,8 +10,8 @@ import SignupPage from './components/Pages/Signup.jsx'
 import LoginPage from './components/Pages/Login.jsx'
 import EditPost from './components/Pages/EditPost.jsx'
 import AllPost from './components/Pages/AllPost.jsx'
-import AddPost from './components/Pages/Addpost.jsx'
-// import EditPost from './components/Pages/EditPost.jsx'
+import AddPost from './components/Pages/AddPost.jsx'
+
 import Post from './components/Pages/Post.jsx'
 import { BrowserRouter, createBrowserRouter,RouterProvider } from 'react-router-dom'
 const router = createBrowserRouter([
