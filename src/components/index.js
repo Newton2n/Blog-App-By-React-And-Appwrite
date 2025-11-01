@@ -11,7 +11,8 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Protected from "./AuthLayout";
 import RTE from "./Rte";
-import PostForm from "./PostForm/postForm";
+// import PostForm from "./PostForm/postForm";
+import PostForm from "./PostForm/PostForm"
 import AuthLayout from "./AuthLayout"
 export {
     Container,
