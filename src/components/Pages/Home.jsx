@@ -24,7 +24,7 @@ function Home() {
         </Container>
       </div>
     );
-  } else if (posts.length === 0 ?? userActive.activeStatus  ) {
+  } else if (posts.length === 0 && userActive.activeStatus  ) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
