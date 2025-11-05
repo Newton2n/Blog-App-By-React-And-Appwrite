@@ -7,7 +7,7 @@ function Home() {
   const userActive = useSelector((state) => state.auth);
   
   useEffect(() => {
-    service.getPosts().then((posts) => (posts ? setPosts(posts.rows) : []));
+  if(userActive) service.getPosts().then((posts) => (posts ? setPosts(posts.rows) : []));
   }, []);
   
 

@@ -89,20 +89,18 @@ export class Service {
   }
   async getPostsQuery(id) {
     const columnName = "userId";
-    console.log("DEBUG: Querying posts for userId:", id);
-    console.log("DEBUG: Querying on column:", columnName);
     try {
+      if(id){
       const result = await this.tables.listRows({
         databaseId: conf.appwriteDatabaseId,
         tableId: conf.appwriteTableId,
         queries: [
-          // Use Query.equal to filter rows where the 'userId' column
-          // matches the provided 'id'.
+       
           Query.equal(columnName, [id]),
         ],
       });
-
       return result;
+    }
     } catch (error) {
       console.log("error occurred in get all post :", error);
     }
