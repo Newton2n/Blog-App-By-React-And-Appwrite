@@ -15,6 +15,7 @@ import RTE from "./Rte";
 import PostForm from "./PostForm/PostForm";
 import AuthLayout from "./AuthLayout";
 import DownloadBtn from "./DownloadBtn";
+import BottomNav from "./BottomNav/BottomNav";
 export {
   Container,
   Header,
@@ -32,4 +33,5 @@ export {
   PostForm,
   AuthLayout,
   DownloadBtn,
+  BottomNav
 };

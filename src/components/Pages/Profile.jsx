@@ -7,12 +7,11 @@ function Profile() {
   const [userPost, setUserPost] = useState();
   const getUserData = useSelector((state) => state.auth.userData);
 
-  console.log("userData", getUserData);
   useEffect(() => {
     if (getUserData) setUserData(getUserData);
     service
-      .getPostsQuery(getUserData.$id)
-      .then((posts) => setUserPost(posts.rows));
+      .getPostsQuery(getUserData?.$id)
+      .then((posts) => setUserPost(posts?.rows));
   }, [getUserData]);
 
   return (

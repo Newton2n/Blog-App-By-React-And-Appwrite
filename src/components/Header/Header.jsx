@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Logo, Container,LogoutBtn } from "../index";
+import { Link, NavLink ,replace,useNavigate} from "react-router-dom";
+import { Logo, Container, LogoutBtn, BottomNav, Button } from "../index";
 import { useSelector } from "react-redux";
-import menuicon from "../../icons/menuicon.png"
 
 function Header() {
+  const navigate = useNavigate()
   const authStatus = useSelector((state) => state.auth.activeStatus);
-  const userData = useSelector((state)=>state.auth.userData)
+  const userData = useSelector((state) => state.auth.userData);
 
   const navItems = [
     {
@@ -24,7 +24,7 @@ function Header() {
       slug: "/signup",
       active: !authStatus,
     },
-   
+
     {
       name: "Add Post",
       slug: "/add-post",
@@ -38,23 +38,20 @@ function Header() {
   ];
 
   return (
-    <header className="py-3 px-2 shadow bg-white">
+    <header className="py-3 shadow bg-white">
       <Container>
-        <nav className="flex justify-center items-center">
-          <div className="mr-4 ml-2">
+         {/* bottom navbar for mobile devices8 */}
+        <BottomNav />
+        <nav className="flex   items-center">
+          <div className="mr-4 ml-3">
             <Link to="/">
-              <Logo/>
+              <Logo />
             </Link>
           </div>
-          <ul className="flex ml-auto items-center justify-center">
-           {/* <li className="sm:hidden cursor-pointer" onClick={()=>menuPage()}>
-            <button>
-             <img src={menuicon} alt="menu" />
-            </button>
-           </li> */}
+          <ul className="flex ml-auto items-center justify-center ">
             {navItems.map((item) =>
               item.active ? (
-                <li key={item.name} className="hover:bg-gray-50 rounded-2xl">
+                <li key={item.name} className="hover:bg-gray-50 rounded-2xl max-sm:hidden">
                   <NavLink
                     to={item.slug}
                     className={({ isActive }) =>
@@ -69,10 +66,13 @@ function Header() {
               ) : null
             )}
             {
-              <li className="ml-2">
-                <LogoutBtn/>
+              <li className="ml-2 mr-3">
+               {userData ? <LogoutBtn />:<Button onClick={()=>navigate("/login",{replace:true})} children={"Login"}/>}
+                
               </li>
+              
             }{" "}
+        
             {/*this code mean if authStatus is true  then the && next part will work or nope*/}
           </ul>
         </nav>
