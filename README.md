@@ -1,16 +1,49 @@
-# React + Vite
+#Postora 
+#A social medaia web app that is created by react ,appwrite and tailwind css .User can create post ,Read, update post and delete post and download images that is uploaded
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#Features
+- User authentication (sign up, sign in and log in )
+- Create post ,edit post ,delete post
+- Upload images with Appwrite storage
+- Responsibe with tailwind css
+- Protected routes for log in user
 
-Currently, two official plugins are available:
+  #Tech stack
+  -React(vite)
+  -Appwrite for backend
+  -Redux for state management 
+  -tinymc for description for more feature in text format
+  -tailwind css (UI)
+  -React router dom for Navigation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   #How to use
+   -Clone the repository https://github.com/Newton2n/Blog-App-By-React-And-Appwrite.git
+   - bash
+     - git clone
+     - install all dependencies
+     - add your .env file with appwrite credentials
+     - 
+       in .env file
+       VITE_APPWRITE_URL="Your appwrite project url"
+       VITE_APPWRITE_PROJECT_ID="Appwrite  project id"
+       VITE_APPWRITE_DATABASE_ID="Appwrite database ID"
+       VITE_APPWRITE_TABLE_ID="Appwrite table ID"
+       VITE_APPWRITE_BUCKET_ID="Appwrite Bucket Id"
+       
+     - and run the project
+      ``  bash terminal
+      npm run dev
+    -run on localhost
 
-## React Compiler
+   #Deployment
+    [Live demo](https://blog-app-kappa-ebon.vercel.app/)
+    
+  #Author
+  *Newton*
+  #Front end developer
+  [Linkden Profile](https://www.linkedin.com/in/newton-bepari-281027380)
+  [Github](https://github.com/Newton2n)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ # This project is open-source and available under the MIT License.
+You are free to use, modify, and distribute it with proper attribution.
