@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Container, PostCard } from "../index";
 import service from "../../../appwrite/config";
 import { useSelector } from "react-redux";
+
 function Home() {
   const [posts, setPosts] = useState([]);
+
   const userActive = useSelector((state) => state.auth);
-  
+
   useEffect(() => {
-  if(userActive) service.getPosts().then((posts) => (posts ? setPosts(posts.rows) : []));
+    if (userActive) {
+      service.getPosts()
+      .then((posts) => (posts ? setPosts(posts.rows) : []))
+      .catch((err)=>console.log("error in loading post",err))
+      
+    }
   }, []);
-  
 
   if (!userActive.activeStatus) {
     return (
@@ -25,7 +31,7 @@ function Home() {
         </Container>
       </div>
     );
-  } else if (posts.length === 0 && userActive.activeStatus  ) {
+  } else if (posts.length === 0 && userActive.activeStatus) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
@@ -43,17 +49,18 @@ function Home() {
     return (
       <div className="m-2">
         <Container>
-          <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 ">
+          <div className="columns-2 sm:columns-4 lg:columns-5 xl:columns-6 ">
             {posts.map((post) => (
-              <div key={post.$id} className=" break-inside-avoid transition-transform hover:scale-[1.02] ">
+              <div
+                key={post.$id}
+                className=" break-inside-avoid transition-transform hover:scale-[1.02] "
+              >
                 <PostCard {...post} />
               </div>
             ))}
           </div>
         </Container>
       </div>
-
-
     );
   }
 }
