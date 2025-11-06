@@ -5,8 +5,8 @@ import { Controller } from "react-hook-form";
 export default function RTE({ name, control, label }) {
   return (
     <div className="w-full">
-      {label && <label className="inline-block mb-1 pl-1">{label}</label>}
-
+      {label && <label className="inline-block mb-2 pl-2 font-bold">{label}</label>}
+     <div className="w-full py-3">
       <Controller
         name={name || "content"}
         control={control}
@@ -17,7 +17,7 @@ export default function RTE({ name, control, label }) {
             apiKey="ij0wxiglm84zt0qz8xooyy7q5ouaqu9pptcw3a1svv3fwvjz"
             init={{
               height: 300,
-            
+              
               menubar: true,
               plugins: [
                 "image",
@@ -49,6 +49,7 @@ export default function RTE({ name, control, label }) {
           />
         )}
       />
+      </div>
     </div>
   );
 }

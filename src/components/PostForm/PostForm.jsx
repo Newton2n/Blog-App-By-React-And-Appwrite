@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RTE, Input, Button, Select } from "../index";
+import { RTE, Input, Button, Select,Container } from "../index";
 import { useSelector } from "react-redux";
 import service from "../../../appwrite/config";
 import { useForm } from "react-hook-form";
@@ -11,10 +11,10 @@ export default function PostForm({ post }) {
   const { register, control, watch, handleSubmit, getValues, setValue } =
     useForm({
       defaultValues: {
-        title: post?.title,
-        slug: post?.$id,
-        content: post?.content,
-        status: "active",
+        title: post?.title||"",
+        slug: post?.$id||"",
+        content: post?.content||"",
+        status: post?.status||"Active",
       },
     });
   useEffect(() => {
@@ -84,53 +84,57 @@ export default function PostForm({ post }) {
 
   return (
     <>
-      <form className=" flex gap-1" onSubmit={handleSubmit(submit)}>
-        <div className="left w-2/3 ">
+    <Container>
+      <form className=" flex pr-4 pl-4 flex-col sm:w-full md:w-3/4 mx-auto"  onSubmit={handleSubmit(submit)}>
+        <div className="left ">
           <Input
-            label={"tittle"}
+            label={"Title"}
             type={"text"}
-            className={"my-3"}
-            placeholder={"Title name "}
+            className={"mb-5 mt-2"}
+            placeholder={"Title  "}
             {...register("title", { required: true })}
           />
           <Input
             disabled
-            label={"slug"}
+            label={"Slug"}
             type={"text"}
-            className={"my-3"}
-            placeholder={"Slug"}
+            className={"mb-5 mt-2"}
+            placeholder={"Slug auto generated"}
             {...register("slug", { required: true })}
           />
           <RTE
+            label={"Content"}
             control={control}
             {...register("content", {
               required: true,
             })}
           />
         </div>
-        <div className="right w-1/3 flex flex-col  items-center">
+        <div className="right  flex flex-col  items-center">
           <Input
             label={"Image"}
             type={"file"}
-            className={"my-3"}
+            className={"mb-5 mt-2"}
             {...register("image", { required: true })}
             accept="image/png, image/jpg, image/jpeg, image/gif"
           />
           <Select
             label={"Status"}
             options={["Active", "Inactive"]}
-            className={"my-3"}
+            className={"mb-5"}
+            value={"Active"}
             {...register("status", { required: true })}
           />
-          <Button type={"submit"} className={" w-1/3 my-1 "}>
+          <Button type={"submit"} className={" w-[25%] my-3 py-1"}>
             {post ? "Update" : "upload"}
           </Button>
 
           {post && (
-            <img className="rounded w-3/4 ml-2" src={imgUrl} alt={post.title} />
+            <img className="rounded-xl w-3/4 " src={imgUrl} alt={post.title} />
           )}
         </div>
       </form>
+      </Container>
     </>
   );
 }
