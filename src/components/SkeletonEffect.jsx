@@ -18,7 +18,7 @@ function SkeletonCard() {
 export default function SkeletonEffect({ count = 16 }) {
   return (
     <Container>
-      <div className="w-full columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-3">
+      <div className="w-full p-4 columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-3">
         {Array.from({ length: count }).map((_, index) => (
           <SkeletonCard key={index} />
         ))}
