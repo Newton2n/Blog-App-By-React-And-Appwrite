@@ -18,6 +18,7 @@ import DownloadBtn from "./DownloadBtn";
 import BottomNav from "./BottomNav/BottomNav";
 import SkeletonEffect from "./SkeletonEffect";
 import ThemeToggler from "./ThemeToggler";
+import Popup from "./Popup";
 export {
   Container,
   Header,
@@ -38,4 +39,6 @@ export {
   BottomNav,
   SkeletonEffect,
   ThemeToggler,
+  Popup
+
 };

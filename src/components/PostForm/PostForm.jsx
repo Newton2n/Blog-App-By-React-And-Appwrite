@@ -42,6 +42,7 @@ export default function PostForm({ post }) {
       if (updatePost) navigate(`/post/${updatePost.$id} `)
     } else {
       try {
+        console.log("img",data.image[0])
         const fileUpload = await service.fileUpload(data.image[0]);
         const fileId = fileUpload.$id;
 
@@ -125,7 +126,7 @@ export default function PostForm({ post }) {
             value={"Active"}
             {...register("status", { required: true })}
           />
-          <Button type={"submit"} className={" w-[25%] my-3 py-1"}>
+          <Button type={"submit"} className={"bg-orange-500 text-white w-[25%] my-3 py-1"}>
             {post ? "Update" : "upload"}
           </Button>
 

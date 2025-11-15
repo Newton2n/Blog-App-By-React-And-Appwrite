@@ -13,7 +13,7 @@ function LogOutBtn() {
     dispatch(logout());
     if (deleteSession) navigate("/login", { replace: true });
   };
-  return <Button className="hover:bg-red-700" children={"Logout"} onClick={logOutBtn} />;
+  return <Button className="hover:bg-red-700 bg-red-500 text-white" children={"Logout"} onClick={logOutBtn} />;
 }
 
 export default LogOutBtn;

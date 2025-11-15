@@ -7,7 +7,7 @@ function PostCard({ $id, title, featuredImg }) {
   const [imgUrl, setImgUrl] = useState();
 
   useEffect(() => {
-    service.fileView(featuredImg, title).then((url) => setImgUrl(url));
+    service.fileView(featuredImg).then((url) => setImgUrl(url));
   }, []);
 
 
@@ -17,7 +17,7 @@ function PostCard({ $id, title, featuredImg }) {
       <div className="w-full bg-white dark:bg-black rounded-3xl  flex-col flex items-center ">
         <div className="w-full mb-2 flex flex-col">
           <div className="flex justify-end pb-2 pr-4 ">
-          <DownloadBtn featuredImg={featuredImg} title={title} />
+          <DownloadBtn featuredImg={featuredImg} />
           </div>
           <img
             src={imgUrl}

@@ -9,7 +9,7 @@ import Home from './components/Pages/Home.jsx'
 import SignupPage from './components/Pages/Signup.jsx'
 import LoginPage from './components/Pages/Login.jsx'
 import EditPost from './components/Pages/EditPost.jsx'
-
+import EditProfile from './components/Pages/EditProfile.jsx'
 import AddPost from './components/Pages/AddPost.jsx'
 import Profile from './components/Pages/Profile.jsx'
 import Post from './components/Pages/Post.jsx'
@@ -27,6 +27,7 @@ const router = createBrowserRouter([
       {path : "/add-post", element :<AuthLayout authentication ={true} > <AddPost/></AuthLayout>},
       {path : "/add-post", element :<AuthLayout authentication ={true} > <AddPost/></AuthLayout>},
       {path : "/edit-post/:postId", element :<AuthLayout authentication ={true} >  <EditPost/></AuthLayout>},
+      {path : "/edit-profile", element :<AuthLayout authentication ={true} >  <EditProfile/></AuthLayout>},
       {path : "/post/:postId", element :<AuthLayout authentication={true}> <Post/></AuthLayout>},
     ]
   }
