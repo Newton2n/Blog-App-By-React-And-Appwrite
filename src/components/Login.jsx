@@ -82,7 +82,7 @@ function Login() {
                     })
                 }/>
                 {errors.password && <p className="text-red-500" role="alert">{errors.password.message}</p>}
-                <Button type="submit" children={'Submit'} className="w-full"/>
+                <Button type="submit" children={'Submit'} className="w-full bg-red-500 text-white"/>
               </div>
         </form>
       </div>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Input, Button, Logo } from "./index";
 import authservice from "../../appwrite/auth";
+import service from "../../appwrite/config";
 import { login } from "../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { themeSlice } from "../store/themeSlice";
 
 function Signup() {
   const navigate = useNavigate();
@@ -16,19 +18,23 @@ function Signup() {
     formState: { errors },
   } = useForm();
   const createAccount = async (data) => {
-   
     setError(null);
     try {
       const newAccount = await authservice.createAccount(data);
-      
+
       if (newAccount) {
-        const userData = await authservice.getCurrentUser();
-       
-        if (userData) dispatch(login(userData));
-        navigate("/",{ replace: true });
+        const userData = await authservice.getCurrentUser().then((userData) => {
+          service.createProfileInformationPost({
+            userId: userData.$id,
+            fullName: userData.name,
+            email: userData.email,
+          });
+          if (userData) dispatch(login(userData));
+        });
+        return navigate("/", { replace: true });
       }
     } catch (error) {
-      setError("error occurred",error.message);
+      setError("error occurred", error.message);
     }
   };
   return (
@@ -55,38 +61,58 @@ function Signup() {
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form onSubmit={handleSubmit(createAccount)}>
-            <div className="space-y-5">
-          <Input label={'Full Name :'} placeholder ={'Enter your full name'} 
-          {...register("name",{
-            required :true,
-           
-          })} />
-           {errors.name && <p className='text-red-600'> {errors.name.message} </p>}
-          <Input label={'Email:'} placeholder ={'Enter your email address'} type={'email'}
-          {...register("email",{
-            required :true,
-            validate :{
-                matchPattern : (value)=>
-                                /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i.test(value)||"enter a valid email address",
-                            
-            }
-          })}/>
-          
-           {errors.email && <p className='text-red-600'> {errors.email.message} </p>}
-          <Input  label={'Password:'} placeholder ={'Enter password'} type={'password'}
-          {...register("password",{
-            required :true,
-            validate :{
-                matchPattern :(value)=>  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(value) || 'enter a strong password at least 8 characters must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number'
-                          
-            }
-          })} />
-         {errors.password && <p className='text-red-600'> {errors.password.message} </p>}
-          <Button
-            type="submit"
-            children={"Create Account"}
-            className={"w-full mt-4 cursor-pointer"}
-          />
+          <div className="space-y-5">
+            <Input
+              label={"Full Name :"}
+              placeholder={"Enter your full name"}
+              {...register("name", {
+                required: true,
+              })}
+            />
+            {errors.name && (
+              <p className="text-red-600"> {errors.name.message} </p>
+            )}
+            <Input
+              label={"Email:"}
+              placeholder={"Enter your email address"}
+              type={"email"}
+              {...register("email", {
+                required: true,
+                validate: {
+                  matchPattern: (value) =>
+                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i.test(
+                      value
+                    ) || "enter a valid email address",
+                },
+              })}
+            />
+
+            {errors.email && (
+              <p className="text-red-600"> {errors.email.message} </p>
+            )}
+            <Input
+              label={"Password:"}
+              placeholder={"Enter password"}
+              type={"password"}
+              {...register("password", {
+                required: true,
+                validate: {
+                  matchPattern: (value) =>
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(
+                      value
+                    ) ||
+                    "enter a strong password at least 8 characters must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number",
+                },
+              })}
+            />
+            {errors.password && (
+              <p className="text-red-600"> {errors.password.message} </p>
+            )}
+            <Button
+              type="submit"
+              children={"Create Account"}
+              className={"w-full mt-4 cursor-pointer bg-red-500 text-white"}
+            />
           </div>
         </form>
       </div>

@@ -83,6 +83,7 @@ function Header() {
                   <Button
                     onClick={() => navigate("/login", { replace: true })}
                     children={"Login"}
+                    className={"bg-red-500 text-white hover:bg-red-600"}
                   />
                 )}
               </li>

@@ -19,7 +19,7 @@ function EditPost() {
     }
   }, [ postId,navigate]);
 
-  return <div className="w-full py-8">
+  return <div className="w-full py-8 bg-black">
      <Container>
       <PostForm post ={post}/>
      </Container>

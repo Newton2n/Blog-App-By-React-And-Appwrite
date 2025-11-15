@@ -90,17 +90,14 @@ export class Service {
   async getPostsQuery(id) {
     const columnName = "userId";
     try {
-      if(id){
-      const result = await this.tables.listRows({
-        databaseId: conf.appwriteDatabaseId,
-        tableId: conf.appwriteTableId,
-        queries: [
-       
-          Query.equal(columnName, [id]),
-        ],
-      });
-      return result;
-    }
+      if (id) {
+        const result = await this.tables.listRows({
+          databaseId: conf.appwriteDatabaseId,
+          tableId: conf.appwriteTableId,
+          queries: [Query.equal(columnName, [id])],
+        });
+        return result;
+      }
     } catch (error) {
       console.log("error occurred in get all post :", error);
     }
@@ -131,21 +128,6 @@ export class Service {
     }
   }
 
-  //file Preview is for pain appwrite version only free one is file view
-
-  // async filePreview(fileId) {
-  //   try {
-  //     const result = this.storage.getFilePreview({
-  //       bucketId: conf.appwriteBucketId,
-  //       fileId: fileId,
-  //     });
-
-  //     return result;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   async fileView(fileId) {
     try {
       const result = this.storage.getFileView({
@@ -165,12 +147,95 @@ export class Service {
         fileId: fileId,
       });
 
-     if(result){ const link = document.createElement("a");
-      link.href =result
-      link.download =""
-      link.click()}
+      if (result) {
+        const link = document.createElement("a");
+        link.href = result;
+        link.download = "";
+        link.click();
+      }
     } catch (err) {
       console.log("error in download file", err);
+    }
+  }
+  async createProfileInformationPost({
+    userId,
+    userName,
+    fullName,
+    email,
+    phoneNumber,
+    about,
+    profileImageId,
+    coverImageId,
+  }) {
+
+    try {
+      const result = await this.tables.createRow({
+        databaseId: conf.appwriteDatabaseId,
+        tableId: conf.appwriteUsersProfileInformationTableId,
+        rowId: ID.unique(),
+        data: {
+          userId,
+          userName,
+          fullName,
+          email,
+          phoneNumber,
+          about,
+          coverImageId,
+          profileImageId,
+        },
+      });
+   
+      return result;
+    } catch (error) {
+      console.log("error in uploading profile details");
+    }
+  }
+  async updateProfileInformationPost(
+    rowId,
+    {
+      userId,
+      userName,
+      fullName,
+      email,
+      phoneNumber,
+      about,
+      profileImageId,
+      coverImageId,
+    }
+  ) {try {
+      const result = await this.tables.updateRow({
+        databaseId: conf.appwriteDatabaseId,
+        tableId: conf.appwriteUsersProfileInformationTableId,
+        rowId: rowId,
+        data: {
+          userId,
+      userName,
+      fullName,
+      email,
+      phoneNumber,
+      about,
+      profileImageId,
+      coverImageId,
+        },
+      });
+
+      return result;
+    } catch (error) {
+      console.log("error occurred in update post ", error);
+    }}
+   async getProfileInformationQuery(id) {
+    const columnName = "userId";
+    try {
+      if (id) {
+        const result = await this.tables.listRows({
+          databaseId: conf.appwriteDatabaseId,
+          tableId: conf.appwriteUsersProfileInformationTableId,
+          queries: [Query.equal(columnName, [id])],
+        });
+        return result;
+      }
+    } catch (error) {
+      console.log("error occurred in get all post :", error);
     }
   }
 }
