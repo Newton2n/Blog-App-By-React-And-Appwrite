@@ -8,12 +8,13 @@ import { login, logout } from "./store/authSlice";
 import { setTheme } from "./store/themeSlice";
 function App() {
   const dispatch = useDispatch();
-
   //auto update theme from user local theme
   const userLocalTheme = window.matchMedia(
     "(prefers-color-scheme:dark)"
   ).matches;
   if (userLocalTheme) dispatch(setTheme("dark"));
+
+
 
   useEffect(() => {
     const checkUser = async () => {

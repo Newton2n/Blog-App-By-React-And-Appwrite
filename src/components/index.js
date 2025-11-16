@@ -19,6 +19,7 @@ import BottomNav from "./BottomNav/BottomNav";
 import SkeletonEffect from "./SkeletonEffect";
 import ThemeToggler from "./ThemeToggler";
 import Popup from "./Popup";
+import ErrorBoundary from "./ErrorBoundary";
 export {
   Container,
   Header,
@@ -39,6 +40,7 @@ export {
   BottomNav,
   SkeletonEffect,
   ThemeToggler,
-  Popup
+  Popup,
+  ErrorBoundary
 
 };

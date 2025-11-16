@@ -8,15 +8,7 @@ function Protected({ children ,authentication =true}) {
 
 
   useEffect(() => {
-  //   if(authentication ===false){
-  //    navigate()
-  //   }else if(authentication===true &&authStatus===false){
-  //     navigate("/login")
-  //   }else if(authentication ===true && authStatus ===true){
-  //     navigate(slug)
-  //   }
-  //   setLoading(false);
-  //
+ 
   
         if(authentication && authStatus !== authentication){
             navigate("/login",{replace:true})

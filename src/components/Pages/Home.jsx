@@ -19,7 +19,7 @@ function Home() {
   if(loading) return <SkeletonEffect count={22}/>
   if (!userActive.activeStatus) {
     return (
-      <div className="w-full py-8  text-center dark:bg-black">
+      <div className="w-full min-h-screen py-8  text-center dark:bg-black">
         <Container>
           <div className="flex flex-wrap ">
             <div className="p-2 w-full">
@@ -34,7 +34,7 @@ function Home() {
     );
   } else if (posts.length === 0 && userActive.activeStatus) {
     return (
-      <div className="w-full py-8  text-center dark:bg-black">
+      <div className="w-full min-h-screen py-8  text-center dark:bg-black">
         <Container>
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
@@ -48,7 +48,7 @@ function Home() {
     );
   } else if (userActive.activeStatus && posts.length > 0) {
     return (
-      <div className="px-2 py-1 dark:bg-black">
+      <div className="px-2 py-1 min-h-screen dark:bg-black">
         <Container>
           <div className="columns-2 sm:columns-4 lg:columns-5 xl:columns-6 ">
             {posts.map((post) => (
