@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { store } from "./store/store.js";
 import { Provider } from "react-redux";
-import { AuthLayout } from "./components/index.js";
+import { AuthLayout,LenisProvider } from "./components/index.js";
 import Home from "./components/Pages/Home.jsx";
 import SignupPage from "./components/Pages/Signup.jsx";
 import LoginPage from "./components/Pages/Login.jsx";
@@ -96,6 +96,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+   <LenisProvider>
+      <RouterProvider router={router} />
+    </LenisProvider> 
   </Provider>
 );
