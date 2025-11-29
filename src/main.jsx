@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { store } from "./store/store.js";
 import { Provider } from "react-redux";
-import { AuthLayout } from "./components/index.js";
+import { AuthLayout,LenisProvider } from "./components/index.js";
 import Home from "./components/Pages/Home.jsx";
 import SignupPage from "./components/Pages/Signup.jsx";
 import LoginPage from "./components/Pages/Login.jsx";
@@ -14,7 +14,7 @@ import Profile from "./components/Pages/Profile.jsx";
 import Post from "./components/Pages/Post.jsx";
 import { ErrorBoundary } from "./components/index.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ReactLenis from "lenis/react"; //Smooth scroll animation
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -96,20 +96,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <ReactLenis
-      root
-      options={{
-        lerp: 0.06, // smoother inertia
-        duration: 1.3, // longer easing curve
-        smoothWheel: true,
-        smoothTouch: false,
-        wheelMultiplier: 0.9, // reduces aggressive scroll jumps
-        touchMultiplier: 1.5,
-        orientation: "vertical",
-        gestureOrientation: "vertical",
-      }}
-    >
+   <LenisProvider>
       <RouterProvider router={router} />
-    </ReactLenis>
+    </LenisProvider> 
   </Provider>
 );
