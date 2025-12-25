@@ -1,6 +1,7 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import service from "../../appwrite/config";
+import service from "@/lib/appwrite/config";
 import {  DownloadBtn } from "../components/index";
 
 function PostCard({ $id, title, featuredImg }) {
