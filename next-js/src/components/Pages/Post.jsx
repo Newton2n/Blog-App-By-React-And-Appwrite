@@ -7,6 +7,9 @@ import Link from "next/link";
 import service from "@/lib/appwrite/config";
 import { useSelector } from "react-redux";
 import parse from "html-react-parser";
+import Image from "next/image";
+
+
 function Post() {
   const router = useRouter();
   const { postId } = useParams();
@@ -42,9 +45,12 @@ function Post() {
       <Container>
         <div className="w-full py-10 px-10 flex max-sm:flex-col dark:bg-black">
           <div className="relative w-full md:w-2/3 mb-6 md:mb-0 mr-8">
-            <img
+            <Image
               src={imgUrl}
               alt={post.title}
+              height={500}
+              width={500}
+              quality={100}
               className="rounded-xl w-full h-auto object-cover border"
             />
 

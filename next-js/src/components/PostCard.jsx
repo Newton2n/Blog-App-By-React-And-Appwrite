@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import service from "@/lib/appwrite/config";
 import {  DownloadBtn } from "../components/index";
-
+import Image from "next/image";
 function PostCard({ $id, title, featuredImg }) {
   const [imgUrl, setImgUrl] = useState();
-
+  console.log(imgUrl)
   useEffect(() => {
-    service.fileView(featuredImg).then((url) => setImgUrl(url));
-  }, []);
-
+    let isMounted =true ;
+      service.fileView(featuredImg).then((url) =>
+        
+      { if(isMounted) setImgUrl(url)});
+     return ()=>{isMounted =false}
+    }, [featuredImg]);
+   
 
 
   return (
@@ -20,12 +24,16 @@ function PostCard({ $id, title, featuredImg }) {
           <div className="flex justify-end pb-2 pr-4 ">
           <DownloadBtn featuredImg={featuredImg} />
           </div>
-          <img
-            src={imgUrl}
+        { imgUrl ? (<Image
+            src={ imgUrl}
+            alt={title}
+            height={400}
+            width={200}
             className="rounded-2xl shadow-md dark:shadow dark:shadow-white/50  hover:opacity-50
 
 "
-          />
+          />):(<div className="animate-pulse text-gray-400 text-xs">Loading image...</div>)}
+         
         </div>
         <h2 className="text-[13px]  pb-1 dark:text-white">{title} </h2>
       </div>

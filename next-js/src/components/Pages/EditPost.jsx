@@ -6,6 +6,7 @@ import service from "@/lib/appwrite/config";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
 function EditPost() {
   const [post, setPost] = useState();
   const router = useRouter();
