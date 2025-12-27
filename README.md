@@ -1,5 +1,5 @@
 #Postora 
-#A social medaia web app that is created by react ,appwrite and tailwind css .User can create post ,Read, update post and delete post and download images that is uploaded
+#A social media web app that is created by react ,appwrite and tailwind css .User can create post ,Read, update post and delete post and download images that is uploaded
 
 #Features
 - User authentication (sign up, sign in and log in )
