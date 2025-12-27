@@ -15,7 +15,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} } antialiased`}>
+      <body
+        className={`${geistSans.variable}  antialiased suppressHydrationWarning`}
+      >
         <ReduxProvider>
           <Header />
           {children}

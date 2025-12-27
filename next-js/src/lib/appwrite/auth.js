@@ -1,4 +1,4 @@
-"use client"
+
 import conf from "@/lib/conf/conf";
 import { Client, Account, ID } from "appwrite";
 
