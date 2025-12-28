@@ -6,7 +6,7 @@ import Image from "next/image";
 import ProfileActionButtons from "@/components/ui/profile-action-buttons";
 
 async function Profile({ params }) {
-  const { userId } = params;
+  const { userId } =await params;
   console.log(userId);
 
   const [profileResponse, postsResponse] = await Promise.all([
