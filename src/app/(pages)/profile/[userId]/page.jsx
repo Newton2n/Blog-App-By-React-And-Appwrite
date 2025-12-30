@@ -7,18 +7,17 @@ import ProfileActionButtons from "@/components/ui/profile-action-buttons";
 
 async function Profile({ params }) {
   const { userId } = await params;
-  console.log(userId);
+  
 
   const [profileResponse, postsResponse] = await Promise.all([
     service.getProfileInformationQuery(userId),
     service.getPostsQuery(userId),
   ]);
-  console.log(profileResponse, postsResponse);
+
   const accountDetails = profileResponse?.rows[0];
   const userPost = postsResponse?.rows || [];
   const profileImgUrl = await service.fileView(accountDetails?.profileImageId);
-  console.log("img url",profileImgUrl);
-  console.log(accountDetails);
+  
 
   if (!accountDetails)
     return (

@@ -8,7 +8,7 @@ function Header() {
   // const navigate = useNavigate();
   const authStatus = useSelector((state) => state.auth.activeStatus);
   const userData = useSelector((state) => state.auth.userData);
-  console.log(userData,authStatus,"in header")
+  
   const isActive =false ;
   const router =useRouter()
   const navItems = [

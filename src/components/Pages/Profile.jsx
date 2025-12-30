@@ -17,9 +17,8 @@ import Image from "next/image";
   const [accountDetails, setAccountDetails] = useState();
   const [profileImgUrl, setProfileImgUrl] = useState();
   const user = useParams();
-  console.log(user);
   const getUserData = useSelector((state) => state.auth.userData);
- console.log(getUserData)
+
   useEffect(() => {
     if (!getUserData) return;
 

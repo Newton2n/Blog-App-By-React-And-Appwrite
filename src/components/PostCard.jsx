@@ -6,7 +6,7 @@ import { DownloadBtn } from "../components/index";
 import Image from "next/image";
 function PostCard({ $id, title, featuredImg }) {
   const [imgUrl, setImgUrl] = useState();
-  console.log(imgUrl);
+
   useEffect(() => {
     let isMounted = true;
     service.fileView(featuredImg).then((url) => {
@@ -30,6 +30,7 @@ function PostCard({ $id, title, featuredImg }) {
               alt={title}
               height={400}
               width={200}
+              loading="eager"
               className="rounded-2xl shadow-md dark:shadow dark:shadow-white/50  hover:opacity-50"
             />
           )}

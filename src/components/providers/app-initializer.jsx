@@ -18,7 +18,6 @@ export default function AppInitializer({ children }) {
     const checkUser = async () => {
       try {
         const userData = await authservice.getCurrentUser();
-        console.log("user data",userData)
         userData ? dispatch(login(userData)) : dispatch(logout());
       } catch (error) {
         dispatch(logout());
