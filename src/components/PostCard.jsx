@@ -24,6 +24,7 @@ function PostCard({ $id, title, featuredImg }) {
           <div className="flex justify-end pb-2 pr-4 ">
             <DownloadBtn featuredImg={featuredImg} />
           </div>
+
           {imgUrl && (
             <Image
               src={imgUrl}
