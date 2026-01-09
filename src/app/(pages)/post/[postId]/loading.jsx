@@ -1,9 +1,9 @@
 import React from 'react'
 import PostPageSkeleton from '@/components/ui/effects/post-page-skeleton'
-function loading() {
+function Loading() {
   return (
     <PostPageSkeleton/>
   )
 }
 
-export default loading
+export default Loading
