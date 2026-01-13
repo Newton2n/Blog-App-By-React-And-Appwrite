@@ -3,7 +3,8 @@ import service from "@/lib/appwrite/config";
 import parse from "html-react-parser";
 import Image from "next/image";
 import EditDeleteButton from "@/components/ui/edit-delete-button";
-
+import AuthorPicture from "@/components/ui/author-picture";
+import Link from "next/link";
 //meta data
 export async function generateMetadata({ params }) {
   const { postId } = await params;
@@ -37,6 +38,19 @@ export default async function Page({ params }) {
                   className="rounded-xl w-full h-auto object-cover border"
                 />
               )}
+              {/* Author Profile picture and
+              
+              */}
+              <Link
+              href={`/profile/${post?.userId}`}>
+              <AuthorPicture
+                userId={post?.userId}
+                className={
+                  "h-3 w-3 min-[200px]:h-5 min-[200px]:w-5 min-[300px]:h-9 min-[300px]:w-9 sm:w-13 sm:h-13 md:w-15 md:h-15 absolute top-2 left-2 min-[300px]:top-4 min-[300px]:left-4 cursor-pointer rounded-full inset-shadow-sm"
+                }
+              />
+              </Link>
+              
               {/* Edit/Delete Buttons only for author */}
               <EditDeleteButton post={post} />{" "}
             </div>
