@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import React from "react";
-import { PostForm,Container } from "../index";
+import { PostForm, Container } from "../index";
+
 function AddPost() {
   return (
     <div className=" py-8 dark:bg-black">
       <Container>
-      <PostForm />
+        <PostForm />
       </Container>
     </div>
   );

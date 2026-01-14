@@ -8,10 +8,11 @@ import service from "@/lib/appwrite/config";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
+import AuthLoading from "../ui/loading/auth-loading";
 export default function PostForm({ post }) {
   const router = useRouter();
   const userData = useSelector((data) => data.auth.userData);
+  const [isAuthor, setIsAuthor] = useState(false);
   const [imgUrl, setImgUrl] = useState();
   const {
     register,
@@ -29,6 +30,7 @@ export default function PostForm({ post }) {
       status: post?.status || "Active",
     },
   });
+
   useEffect(() => {
     if (!post) return;
     service.fileView(post.featuredImg).then((url) => setImgUrl(url));
@@ -53,7 +55,6 @@ export default function PostForm({ post }) {
       if (updatePost) router.push(`/post/${updatePost.$id} `);
     } else {
       try {
-        console.log("img", data.image[0]);
         const fileUpload = await service.fileUpload(data.image[0]);
         const fileId = fileUpload.$id;
 
@@ -91,8 +92,26 @@ export default function PostForm({ post }) {
       }
     });
 
-    return () => subscription.unsubscribe;
+    return () => subscription.unsubscribe();
   }, [watch, slugTransform]);
+
+  useEffect(() => {
+    if (userData) {
+      setIsAuthor(true);
+    } else {
+      const wait = setTimeout(() => {
+        if (!userData) router.replace("/login");
+      }, 500);
+      return () => clearTimeout(wait);
+    }
+  }, [userData]); //authenticate user wait 500 ms for authenticate
+
+  if (!userData && !isAuthor) {
+    return <AuthLoading />;
+  }
+  {
+    /* Auth loading  */
+  }
 
   return (
     <>
