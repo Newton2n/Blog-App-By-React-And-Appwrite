@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -6,10 +6,10 @@ import { Container, Input, Button, Popup } from "../index";
 import service from "@/lib/appwrite/config";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import AuthLoading from "../ui/loading/auth-loading";
 function EditProfile() {
-  const router = useRouter()
+  const router = useRouter();
   const userData = useSelector((state) => state.auth.userData);
-  if(!userData) return router.replace("/login")
   const [userInformation, setUserInformation] = useState();
 
   const {
@@ -29,6 +29,18 @@ function EditProfile() {
 
   // Control button visibility independently
   const [showButtons, setShowButtons] = useState(false);
+  const [isAuthor, setIsAuthor] = useState(false);
+  //Verify auth
+  useEffect(() => {
+    if (userData) {
+      setIsAuthor(true);
+    } else {
+      const wait = setTimeout(() => {
+        if (!isAuthor) router.replace("/login");
+      }, 500);
+      return () => clearTimeout(wait);
+    }
+  }, [userData]);
 
   //update and reset button show
   useEffect(() => {
@@ -38,8 +50,8 @@ function EditProfile() {
   //Fetching user details
   useEffect(() => {
     const getInformation = async () => {
-        if (!userData?.$id) return;
- 
+      if (!userData?.$id) return;
+
       const information = await service.getProfileInformationQuery(
         userData?.$id
       );
@@ -130,14 +142,12 @@ function EditProfile() {
 
   //profile img url
   const [profileImgUrl, setProfileImgUrl] = useState(null);
- 
- const profileImageId = userInformation?.profileImageId
+
+  const profileImageId = userInformation?.profileImageId;
   //getting img url
   useEffect(() => {
     if (profileImageId)
-      service
-        .fileView(profileImageId)
-        .then((url) => setProfileImgUrl(url));
+      service.fileView(profileImageId).then((url) => setProfileImgUrl(url));
   }, [userInformation]);
 
   const [imgPopup, setImgPopup] = useState(false);
@@ -145,6 +155,8 @@ function EditProfile() {
 
   const openImgPopUp = () => setImgPopup(true);
   const openResetPopUp = () => setResetPopup(true);
+
+  if(!userData) return <AuthLoading/>
 
   return (
     <Container>
@@ -194,17 +206,15 @@ function EditProfile() {
           <div className="w-full flex flex-col items-start">
             <p className="text-black dark:text-white py-1">Photo</p>
             <div className="w-full flex">
-              <div
-                className="relative w-20 h-20 rounded-full border border-black dark:border-white overflow-hidden"
-                
-              >
+              <div className="relative w-20 h-20 rounded-full border border-black dark:border-white overflow-hidden">
                 <Image
-                  src={profileImgUrl && typeof profileImgUrl ==="string"
-                ? profileImgUrl
-                : "/image/initial-profile-pic2.webp"}
+                  src={
+                    profileImgUrl && typeof profileImgUrl === "string"
+                      ? profileImgUrl
+                      : "/image/initial-profile-pic2.webp"
+                  }
                   alt="profile picture"
                   fill
-
                   className="object-cover h-full w-full"
                 />
               </div>

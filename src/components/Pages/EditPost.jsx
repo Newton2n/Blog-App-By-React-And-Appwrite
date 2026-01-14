@@ -5,22 +5,41 @@ import { useSelector } from "react-redux";
 import service from "@/lib/appwrite/config";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import AuthLoading from "../ui/loading/auth-loading";
 
 function EditPost() {
   const [post, setPost] = useState();
   const router = useRouter();
-  const loginUserDetails = useSelector((state) => state.auth.userData);
-  if (!loginUserDetails) return router.replace("/login");
+  const userData = useSelector((state) => state.auth.userData);
+  const [isAuthor, setIsAuthor] = useState(false);
   const { postId } = useParams();
 
+  //get post
   useEffect(() => {
     if (postId) {
-      service.getPost(postId).then((post) => setPost(post));
+      service
+        .getPost(postId)
+        .then((post) => setPost(post))
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      router.push("/");
+      router.replace("/");
     }
   }, [postId]);
 
+  //Authenticate owner
+  useEffect(() => {
+    if (post?.userId && userData?.$id && post?.userId === userData?.$id) {
+      setIsAuthor(true);
+    } else {
+      const wait = setTimeout(() => {
+        if (post?.userId !== userData?.$id) router.replace(`/post/${post.$id}`);
+      }, 500);
+      return () => clearTimeout(wait);
+    }
+  }, [userData, post]);
+  if (!isAuthor) return <AuthLoading />;
   return (
     <div className="w-full py-8 bg-black">
       <Container>

@@ -6,9 +6,12 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 const ProfileActionButtons = ({ postUserId }) => {
   const loginAccountDetails = useSelector((state) => state.auth.userData); //logged in user details
-  if (!postUserId) return;
+
+  if (!postUserId) return null;
+
   const isAuthor =
     postUserId && postUserId === loginAccountDetails?.$id ? true : false; //Author verification
+
   return (
     <div className="flex justify-center space-x-3 mb-8">
       {isAuthor && (
