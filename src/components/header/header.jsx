@@ -62,7 +62,7 @@ function Header() {
               item.active ? (
                 <li
                   key={item.name}
-                  className=" font-normal hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800 rounded-2xl max-sm:hidden"
+                  className=" font-normal hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800 rounded-2xl max-md:hidden"
                 >
                   <Link
                     href={item.slug}

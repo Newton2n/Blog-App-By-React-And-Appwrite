@@ -32,26 +32,28 @@ function BottomNav() {
   ];
   return (
     <Container>
-      <nav className="w-full  bg-white dark:bg-[#2C2C2C] fixed bottom-0 z-999 sm:hidden">
-        <ul className="w-full flex justify-around items-center">
-          {navItems.map((item) => (
-            <li
-              className=" flex py-4 justify-center items-center  rounded"
-              key={item.name}
-            >
-              <Link href={item.slug}>
-                <span>
-                  <FontAwesomeIcon
-                    icon={item.icon}
-                    title={item.name}
-                    aria-label={item.name}
-                    className="text-2xl  dark:text-gray-50"
-                  />{" "}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <nav className="w-full md:hidden">
+        <div className="w-full fixed bottom-0 z-999 bg-white/10 dark:bg-neutral-950/30 backdrop-blur-lg">
+          <ul className="w-full flex justify-around items-center">
+            {navItems.map((item) => (
+              <li
+                className=" flex py-4 justify-center items-center  rounded"
+                key={item.name}
+              >
+                <Link href={item.slug}>
+                  <span>
+                    <FontAwesomeIcon
+                      icon={item.icon}
+                      title={item.name}
+                      aria-label={item.name}
+                      className="text-2xl text-black  dark:text-white"
+                    />{" "}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
     </Container>
   );
