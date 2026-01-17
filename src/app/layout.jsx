@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
             <Analytics />
             <Header />
             {children}
-            {/* bottom navbar for mobile devices8 */}
+            {/* bottom navbar for mobile devices */}
             <BottomNav />
             <Footer />
           </AppInitializer>

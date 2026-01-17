@@ -56,7 +56,7 @@ function Header() {
       className={`w-full py-3  sticky top-0 z-[999] shadow-sm dark:shadow-white/20 transition-[background-color,box-shadow] duration-500 ease-out  ${
         scrolled
           ? "bg-white/10 dark:bg-neutral-950/30 backdrop-blur-lg "
-          : "dark:bg-black "
+          : "dark:bg-black bg-white"
       }`}
     >
         <nav className="flex   items-center">
